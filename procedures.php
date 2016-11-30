@@ -84,10 +84,10 @@
 		*
 		* @returns array
 		*/
-		public function getUser($user_id)
+		public function getUser($username)
 		{
 			$statement = $this->connection->prepare('call GetUser(?)');
-			$statement->bindParam(1,$user_id);
+			$statement->bindParam(1,$username);
 			
 			try 
 			{

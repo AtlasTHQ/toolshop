@@ -1,7 +1,12 @@
 <?php
-    session_start();
     require_once 'connection.php';
     require_once 'procedures.php';
+    require_once 'signup.php';
+    require_once 'login.php';
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,17 +48,17 @@
                                 <li>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form class="form" role="form" method="post" action="" accept-charset="UTF-8" id="login-nav">
+                                            <form class="form" role="form" method="post" action="login.php" accept-charset="UTF-8" id="login-nav">
                                                 <div class="form-group">
                                                     <label class="sr-only" for="username">Username</label>
-                                                    <input type="username" class="form-control" id="log_username" placeholder="Username" required>
+                                                    <input type="username" name="log_username" class="form-control" id="log_username" placeholder="Username" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                                    <label class="sr-only" for="password">Password</label>
+                                                    <input type="password" name="log_password" class="form-control" id="log_password" placeholder="Password" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                    <button name="loginUser" type="submit" class="btn btn-primary btn-block">Log in</button>
                                                 </div>
                                                 <div class="checkbox">
                                                     <label>
@@ -92,7 +97,7 @@
     <!-- Page Content -->
     <div class="container">
         <!-- Modal -->
-        <form method="post" action=""> 
+        <form method="post" action="signup.php"> 
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
@@ -103,26 +108,26 @@
                         </div>
                             <div class="modal-body">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="firstname" id="reg_firstName" placeholder="First Name" required>
+                                        <input type="text" class="form-control" name="reg_firstName" id="reg_firstName" placeholder="First Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="lastname" id="reg_lastName" placeholder="Last Name" required>
+                                        <input type="text" class="form-control" name="reg_lastName" id="reg_lastName" placeholder="Last Name" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" name="email" id="reg_email" placeholder="Email Address" required>
+                                        <input type="email" class="form-control" name="reg_email" id="reg_email" placeholder="Email Address" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="username" id="reg_username" placeholder="Username" required>
+                                        <input type="text" class="form-control" name="reg_username" id="reg_username" placeholder="Username" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="password" id="reg_password" placeholder="Password" required>
+                                        <input type="password" class="form-control" name="reg_password" id="reg_password" placeholder="Password" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="passwordConfirm" id="reg_passwordConfirm" placeholder="Confirm Password" required>
+                                        <input type="password" class="form-control" name="reg_passwordConfirm" id="reg_passwordConfirm" placeholder="Confirm Password" required>
                                     </div>
                             </div>
                             <div class="modal-footer">
-                        <button name="registerUser" type="submit" id="registerUser" value="register" class="btn btn-primary btn-block" data-dismiss="modal">Sign Up</button>
+                        <button name="registerUser" type="submit" id="registerUser" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
                     </div>
                 </div>
             </div>

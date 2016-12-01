@@ -7,5 +7,4 @@
   $user_password = $_POST['Password'];
 
 
-
 ?>

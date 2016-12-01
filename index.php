@@ -126,7 +126,11 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
+<<<<<<< HEAD
                         <button name="registerUser" type="submit" id="registerUserButton" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
+=======
+                        <button name="registerUser" type="submit" id="registerUser" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
+>>>>>>> e364af2ce7708172d6e83caeaeac95c5b0ba6c30
                     </div>
                 </div>
             </div>
@@ -188,7 +192,11 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+<<<<<<< HEAD
     <script src="js/custom.js" type="text/javascript"></script>
+=======
+
+>>>>>>> e364af2ce7708172d6e83caeaeac95c5b0ba6c30
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

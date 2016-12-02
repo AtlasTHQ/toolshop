@@ -48,3 +48,16 @@
         border-top:0 none;
     }
 }
+.displayItem:hover{
+    text-decoration: none;
+    background-color: brown;
+}
+.displayItem:visited{
+    text-decoration: none;
+}
+.displayItem:link{
+    text-decoration: none;
+}
+.imageResizer{
+    height: 210.5px;
+}

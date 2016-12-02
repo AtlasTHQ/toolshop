@@ -1,15 +1,24 @@
-$( document ).ready(function() {
-	console.log("ready");
-	$('#registerUserButton').button("disable");​​​​​​​​​​​​​
+$(document).ready(function() {
 
-	$('#reg_passwordConfirm').bind('keyup', function() { 
-	var Password = $("#reg_password");
-	var confirmPassword = $("#reg_passwordConfirm");
+	var userButton = $("#registerUserButton");
+	userButton.prop("disabled", true);
 
-	if ((Password == confirmPassword) && (Password > 1) && (confirmPassword == 1))
-	{
-	   $('#registerUserButton').button("enable");​​​​​​​​​​​​​
-	}
+	$("#reg_passwordConfirm").keyup(function() { 
+		userButton.empty();
+		var Password = $("#reg_password").val();
+		var confirmPassword = $("#reg_passwordConfirm").val();
+		$
 
+		if ((Password == confirmPassword) && (Password.length > 0) && (confirmPassword.length > 0))
+		{
+		   userButton.prop("disabled", false);
+		   userButton.append("Sign up");
+		}
+		else
+		{
+			var errMsg = "Sorry, but the passwords don't match!";
+			userButton.append(errMsg);
+
+		}
 	} );
 });

@@ -126,11 +126,8 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-<<<<<<< HEAD
                         <button name="registerUser" type="submit" id="registerUserButton" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
-=======
-                        <button name="registerUser" type="submit" id="registerUser" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
->>>>>>> e364af2ce7708172d6e83caeaeac95c5b0ba6c30
+
                     </div>
                 </div>
             </div>
@@ -140,10 +137,14 @@
 
         <div class="col-md-3">
             <p class="lead">Home</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item">Drills</a>
-                <a href="#" class="list-group-item">Screwdrivers</a>
-                <a href="#" class="list-group-item">Supplies</a>
+            <div class="list-group"
+            <?php
+                $result = $conn->prepare("SELECT * FROM categories");
+                $result->execute();
+                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $catName = $row["categoryName"]; ?>
+                    <a href="#" class="list-group-item"><?php echo $catName ?></a>
+            <?php } ?>
             </div>
         </div>
         <div class="col-md-9">
@@ -157,15 +158,18 @@
                     $itemDesc = $row["itemDescription"];
                     $itemPrice = $row["itemPrice"]; ?>
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <img src="<?php echo $imgPath ?>">
-                        <div class="caption">
-                            <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
-                            <h4><a href="#"><?php echo $itemName ?></a>
-                            </h4>
-                            <p><?php echo $itemDesc ?></p>
+                    <a href="#" class="displayItem">
+                        <div class="thumbnail">
+                            <div class="imageResizer">
+                                <img src="<?php echo $imgPath ?>">
+                            </div>
+                            <div class="caption">
+                                <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
+                                <h4><?php echo $itemName ?></h4>
+                                <p><?php echo $itemDesc ?></p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php } ?>
             </div>
@@ -192,11 +196,7 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-<<<<<<< HEAD
     <script src="js/custom.js" type="text/javascript"></script>
-=======
-
->>>>>>> e364af2ce7708172d6e83caeaeac95c5b0ba6c30
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

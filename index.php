@@ -159,7 +159,7 @@
                     $itemDesc = $row["itemDescription"];
                     $itemPrice = $row["itemPrice"]; ?>
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                    <a href="#" class="displayItem">
+                    <a href=<?php echo "item.php?itemID=$itemID" ?> class="displayItem">
                         <div class="thumbnail">
                             <div class="imageResizer">
                                 <img src="<?php echo $imgPath ?>">

@@ -153,6 +153,7 @@
                 $result = $conn->prepare("SELECT * FROM item");
                 $result->execute();
                 while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $itemID = $row["itemID"];
                     $imgPath = $row["itemImgPath"];
                     $itemName = $row["itemName"];
                     $itemDesc = $row["itemDescription"];

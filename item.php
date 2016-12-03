@@ -1,35 +1,35 @@
+<?php
+    require_once 'connection.php';
+    require_once 'procedures.php';
+    require_once 'signup.php';
+    require_once 'login.php';
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Shop Item - Start Bootstrap Template</title>
-
+    <title>Toolshop</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/shop-item.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- Custom -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 </head>
+
 
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -39,8 +39,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Toolshop</a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                            <ul id="login-dp" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form" role="form" method="post" action="login.php" accept-charset="UTF-8" id="login-nav">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="username">Username</label>
+                                                    <input type="username" name="log_username" class="form-control" id="log_username" placeholder="Username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="password">Password</label>
+                                                    <input type="password" name="log_password" class="form-control" id="log_password" placeholder="Password" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button name="loginUser" type="submit" class="btn btn-primary btn-block">Log in</button>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> keep me logged-in
+                                                    </label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="bottom text-center">
+                                            New here ? <a data-toggle="modal" data-target="#myModal"><b>Join Us</b></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -66,16 +100,29 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div>
+            <p class="lead">Home</p>
+            <div class="list-group"
+            <?php
+                $result = $conn->prepare("SELECT * FROM categories");
+                $result->execute();
+                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $catName = $row["categoryName"]; ?>
+                    <a href="#" class="list-group-item"><?php echo $catName ?></a>
+            <?php } ?>
             </div>
+        </div>
 
             <div class="col-md-9">
-
+                <?php 
+                    $result = $conn->prepare("SELECT * FROM item where id = ");
+                    $result->execute();
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        $itemID = $row["itemID"];
+                        $imgPath = $row["itemImgPath"];
+                        $itemName = $row["itemName"];
+                        $itemDesc = $row["itemDescription"];
+                        $itemPrice = $row["itemPrice"];
+                ?>
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
@@ -100,6 +147,7 @@
                         </p>
                     </div>
                 </div>
+                <?php } ?>
 
                 <div class="well">
 

@@ -144,42 +144,17 @@
 
         <div class="col-md-3">
             <p class="lead">Home</p>
-            <div class="list-group"
-            <?php
-                $result = $conn->prepare("SELECT * FROM categories");
-                $result->execute();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $catName = $row["categoryName"]; ?>
-                    <a href="#" class="list-group-item"><?php echo $catName ?></a>
-            <?php } ?>
+            <div class="list-group">
+                <?php
+                    require_once 'displayCategories.php'; 
+                ?>
             </div>
         </div>
         <div class="col-md-9">
             <div class="row">
-            <?php
-                $result = $conn->prepare("SELECT * FROM item");
-                $result->execute();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $itemID = $row["itemID"];
-                    $imgPath = $row["itemImgPath"];
-                    $itemName = $row["itemName"];
-                    $itemDesc = $row["itemDescription"];
-                    $itemPrice = $row["itemPrice"]; ?>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <a href=<?php echo "item.php?itemID=$itemID" ?> class="displayItem">
-                        <div class="thumbnail">
-                            <div class="imageResizer">
-                                <img src="<?php echo $imgPath ?>">
-                            </div>
-                            <div class="caption">
-                                <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
-                                <h4><?php echo $itemName ?></h4>
-                                <p><?php echo $itemDesc ?></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <?php } ?>
+                <?php
+                    require_once 'displayItems.php';
+                ?>
             </div>
         </div>
     </div>

@@ -88,7 +88,7 @@ DROP PROCEDURE IF EXISTS CategoryList $$
 
 CREATE PROCEDURE CategoryList()
 BEGIN
-	SELECT categoryID, categoryName FROM Categories ORDER BY categoryName;
+	SELECT * FROM Categories ORDER BY categoryName;
 END $$
 
 DELIMITER ;

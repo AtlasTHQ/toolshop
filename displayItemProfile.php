@@ -1,5 +1,5 @@
 <?php 
-    $result = $conn->prepare("SELECT * FROM item where itemID = $item_id");
+    $result = $conn->prepare("call getItem($item_id)");
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $itemID = $row["itemID"];

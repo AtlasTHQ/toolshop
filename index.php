@@ -41,39 +41,46 @@
                 <a class="navbar-brand" href="#">Toolshop</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                            <ul id="login-dp" class="dropdown-menu">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <form class="form" role="form" method="post" action="login.php" accept-charset="UTF-8" id="login-nav">
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="username">Username</label>
-                                                    <input type="username" name="log_username" class="form-control" id="log_username" placeholder="Username" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="password">Password</label>
-                                                    <input type="password" name="log_password" class="form-control" id="log_password" placeholder="Password" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button name="loginUser" type="submit" class="btn btn-primary btn-block">Log in</button>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"> keep me logged-in
-                                                    </label>
-                                                </div>
-                                            </form>
+            <!--<?php/*
+                if(he is logged in)
+                { 
+                    echo "<a href='#'><b>Login</b><span class='caret'></span></a>;";
+                }
+                else(everything below)*/
+            ?>-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    <ul id="login-dp" class="dropdown-menu">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="form" role="form" method="post" action="login.php" accept-charset="UTF-8" id="login-nav">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="username">Username</label>
+                                            <input type="username" name="log_username" class="form-control" id="log_username" placeholder="Username" required>
                                         </div>
-                                        <div class="bottom text-center">
-                                            New here ? <a data-toggle="modal" data-target="#myModal"><b>Join Us</b></a>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="password">Password</label>
+                                            <input type="password" name="log_password" class="form-control" id="log_password" placeholder="Password" required>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
+                                        <div class="form-group">
+                                            <button name="loginUser" type="submit" class="btn btn-primary btn-block">Log in</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> keep me logged-in
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New here ? <a data-toggle="modal" data-target="#myModal"><b>Join Us</b></a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
+                </li>
+            </ul>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -134,45 +141,19 @@
         </form>
     </div>
     <div class="row">
-
         <div class="col-md-3">
             <p class="lead">Home</p>
-            <div class="list-group"
-            <?php
-                $result = $conn->prepare("SELECT * FROM categories");
-                $result->execute();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $catName = $row["categoryName"]; ?>
-                    <a href="#" class="list-group-item"><?php echo $catName ?></a>
-            <?php } ?>
+            <div class="list-group">
+                <?php
+                    require_once 'displayCategories.php'; 
+                ?>
             </div>
         </div>
         <div class="col-md-9">
             <div class="row">
-            <?php
-                $result = $conn->prepare("SELECT * FROM item");
-                $result->execute();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    $itemID = $row["itemID"];
-                    $imgPath = $row["itemImgPath"];
-                    $itemName = $row["itemName"];
-                    $itemDesc = $row["itemDescription"];
-                    $itemPrice = $row["itemPrice"]; ?>
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <a href=<?php echo "item.php?itemID=$itemID" ?> class="displayItem">
-                        <div class="thumbnail">
-                            <div class="imageResizer">
-                                <img src="<?php echo $imgPath ?>">
-                            </div>
-                            <div class="caption">
-                                <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
-                                <h4><?php echo $itemName ?></h4>
-                                <p><?php echo $itemDesc ?></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <?php } ?>
+                <?php
+                    require_once 'displayItems.php';
+                ?>
             </div>
         </div>
     </div>

@@ -69,7 +69,7 @@ DELIMITER $$
 
 DROP FUNCTION IF EXISTS ValidateUser $$
 
-CREATE FUNCTION ValidateUser(user_name VARCHAR(15),user_pass VARCHAR(15)) 
+CREATE FUNCTION ValidateUser(user_name VARCHAR(55),user_pass VARCHAR(255)) 
 RETURNS INT
 BEGIN
 	IF EXISTS(SELECT userID FROM Users WHERE userName = user_name AND userPassword = user_pass AND activity = 1) THEN

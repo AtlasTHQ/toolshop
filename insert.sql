@@ -17,3 +17,5 @@ values('Screwdriver 1','Turns the screws','images/1.jpg',500,1),
 ('Miter saw','Handsawing is in the past','images/7.jpg',2000,5),
 ('Bench grinder','Sharp tools for sharp people','images/8.jpg',1250,5);
 
+insert into users (firstName, lastName, userEmail, userName, userPassword, accessLevel, activity)
+values('Tester', 'Test', 'test.tester@testmail.com', 'test', 'test', 1, 1);

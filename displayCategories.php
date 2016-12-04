@@ -1,5 +1,5 @@
 <?php
-    $result = $conn->prepare("SELECT * FROM categories");
+    $result = $conn->prepare("call CategoryList");
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $catID = $row["categoryID"];

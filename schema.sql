@@ -1,37 +1,49 @@
 CREATE DATABASE  IF NOT EXISTS 1612972679_toolshop;
 USE 1612972679_toolshop;
 
+
+DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS item;
 DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS users;
 
 
 CREATE TABLE categories (
-	categoryID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	categoryName varchar(45) UNIQUE
+	categoryID INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	categoryName VARCHAR(45) UNIQUE
 );
 
 CREATE TABLE item (
-	itemID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	itemName varchar(45) NOT NULL,
-	itemDescription varchar(255),
-	itemImgPath varchar(255) DEFAULT NULL,
-	itemPrice double NOT NULL,
-	category_ID int(11) DEFAULT NULL,
+	itemID INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	itemName VARCHAR(45) NOT NULL,
+	itemDescription VARCHAR(255),
+	itemImgPath VARCHAR(255) DEFAULT NULL,
+	itemPrice DOUBLE NOT NULL,
+	category_ID INT(11) DEFAULT NULL,
 	CONSTRAINT fk_category_ID FOREIGN KEY (category_ID) 
     REFERENCES categories (categoryID)
 );
 
-DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-	userID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	firstName varchar(55) NOT NULL,
-	lastName varchar(55) NOT NULL,
-	userEmail varchar(125) NOT NULL UNIQUE,
-	userName varchar(55) NOT NULL UNIQUE,
-	userPassword varchar(255) NOT NULL,
-	accessLevel tinyint(4) DEFAULT '1',
-	activity bit(1) DEFAULT b'1'
+	userID INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	firstName VARCHAR(55) NOT NULL,
+	lastName VARCHAR(55) NOT NULL,
+	userEmail VARCHAR(125) NOT NULL UNIQUE,
+	userName VARCHAR(55) NOT NULL UNIQUE,
+	userPassword VARCHAR(255) NOT NULL,
+	accessLevel TINYINT(4) DEFAULT '1',
+	activity BIT(1) DEFAULT b'1'
+);
+
+CREATE TABLE cart (
+	id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	user_id int(11) NOT NULL,
+	item_id int(11) NOT NULL,
+	CONSTRAINT fk_user_ID FOREIGN KEY (user_ID) 
+    REFERENCES users (userID),
+	CONSTRAINT fk_item_ID FOREIGN KEY (item_ID) 
+    REFERENCES item (itemID)
 );
 
 DELIMITER $$
@@ -39,15 +51,15 @@ DELIMITER $$
 DROP FUNCTION IF EXISTS SetAccessLevel $$
 
 CREATE FUNCTION setAccessLevel(access_level tinyint,user_id int,admin_id int) 
-RETURNS int
+RETURNS INT
 BEGIN
 
-	if(select accessLevel from Users where userID = admin_id) = 3 then
-		update Users set accessLevel = access_level where userID = user_id and activity = 1;
-        return access_level;
-	else
-		return(select accessLevel from Users where userID = user_id and activity = 1);
-	end if;
+	IF(SELECT accessLevel FROM Users AND userID = admin_id) = 3 THEN
+		UPDATE Users SET accessLevel = access_level WHERE userID = user_id AND activity = 1;
+        RETURN access_level;
+	ELSE
+		RETURN(SELECT accessLevel FROM Users WHERE userID = user_id AND activity = 1);
+	END IF;
 
 END $$
 
@@ -57,15 +69,15 @@ DELIMITER $$
 
 DROP FUNCTION IF EXISTS ValidateUser $$
 
-CREATE FUNCTION ValidateUser(user_name varchar(15),user_pass varchar(15)) 
-RETURNS int
-begin
-	if exists(select userID from Users where userName = user_name and userPassword = user_pass and activity = 1) then
-		return 1;
-	else
-		return 0;
-	end if;
-end $$
+CREATE FUNCTION ValidateUser(user_name VARCHAR(15),user_pass VARCHAR(15)) 
+RETURNS INT
+BEGIN
+	IF EXISTS(SELECT userID FROM Users WHERE userName = user_name AND userPassword = user_pass AND activity = 1) THEN
+		RETURN 1;
+	ELSE
+		RETURN 0;
+	END IF;
+END $$
 
 DELIMITER ;
 
@@ -75,9 +87,9 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS CategoryList $$
 
 CREATE PROCEDURE CategoryList()
-begin
-	select categoryID, categoryName from Categories order by categoryName;
-end $$
+BEGIN
+	SELECT categoryID, categoryName FROM Categories ORDER BY categoryName;
+END $$
 
 DELIMITER ;
 
@@ -86,11 +98,11 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS DeleteCategory $$
 
 CREATE PROCEDURE DeleteCategory(category_id int)
-begin
-	if not exists(select categoryID from Images where categoryID = category_id) then
-		delete from categories where categoryID = category_id;
-	end if;
-end $$
+BEGIN
+	IF NOT EXISTS(SELECT categoryID FROM Images WHERE categoryID = category_id) THEN
+		DELETE FROM categories WHERE categoryID = category_id;
+	END IF;
+END $$
 
 DELIMITER ;
 
@@ -98,10 +110,10 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS DeleteUser $$
 
-CREATE PROCEDURE DeleteUser(user_id int)
-begin
-	update Users set activity = 0 where userId = user_id;
-end $$
+CREATE PROCEDURE DeleteUser(user_id INT)
+BEGIN
+	UPDATE Users SET activity = 0 WHERE userId = user_id;
+END $$
 
 DELIMITER ;
 
@@ -109,11 +121,11 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS GetUser $$
 
-CREATE PROCEDURE GetUser(user_Name int)
+CREATE PROCEDURE GetUser(user_Name INT)
 begin
-	select userID,firstName,lastName,userEmail,userName,accessLevel
-    from Users
-    where userName = userName and activity = 1;
+	SELECT userID,firstName,lastName,userEmail,userName,accessLevel
+    FROM Users
+    WHERE userName = userName AND activity = 1;
 end $$
 
 DELIMITER ;
@@ -122,10 +134,10 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS NewCategory $$
 
-CREATE PROCEDURE NewCategory(category_name varchar(45))
-begin
-	insert into Categories(categoryName)values(category_name); 
-end ;;
+CREATE PROCEDURE NewCategory(category_name VARCHAR(45))
+BEGIN
+	INSERT INTO Categories(categoryName)VALUES(category_name); 
+END ;;
 
 
 DELIMITER ;
@@ -135,16 +147,16 @@ DELIMITER $$
 DROP PROCEDURE NewUser $$
 
 CREATE PROCEDURE NewUser(
-	first_name varchar(55),
-	last_name varchar(55),
-    user_email varchar(125),
-    user_name varchar(55),
-    user_password varchar(255)
+	first_name VARCHAR(55),
+	last_name VARCHAR(55),
+    user_email VARCHAR(125),
+    user_name VARCHAR(55),
+    user_password VARCHAR(255)
 )
-begin
-	insert into Users(firstName,lastName,userEmail,userName,userPassword)
-	values(first_name,last_name,user_email,user_name,user_password);
-end $$
+BEGIN
+	INSERT INTO Users(firstName,lastName,userEmail,userName,userPassword)
+	VALUES(first_name,last_name,user_email,user_name,user_password);
+END $$
 
 DELIMITER ;
 
@@ -152,22 +164,22 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS ResetUser $$
 
-CREATE PROCEDURE ResetUser(userID int)
-begin
-	update Users set activity = 1 where userId = user_id;
-end $$
+CREATE PROCEDURE ResetUser(userID INT)
+BEGIN
+	UPDATE Users SET activity = 1 WHERE userId = user_id;
+END $$
 
 DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE UpdateCagegory
+DROP PROCEDURE UpdateCategory $$
 
-CREATE PROCEDURE UpdateCategory(category_name varchar(45), category_id int)
-begin
-	update Categories set categoryName = category_name 
-	where categoryID = category_id;
-end ;;
+CREATE PROCEDURE UpdateCategory(category_name VARCHAR(45), category_id INT)
+BEGIN
+	UPDATE Categories SET categoryName = category_name 
+	WHERE categoryID = category_id;
+END $$
 
 DELIMITER ;
 
@@ -176,18 +188,18 @@ DELIMITER $$
 DROP PROCEDURE UpdateUser $$
 
 CREATE PROCEDURE UpdateUser(
-	user_id int,
-	first_name varchar(55),
-	last_name varchar(55),
-    user_email varchar(125),
-    user_name varchar(15),
-    user_password varchar(15)
+	user_id INT,
+	first_name VARCHAR(55),
+	last_name VARCHAR(55),
+    user_email VARCHAR(125),
+    user_name VARCHAR(15),
+    user_password VARCHAR(15)
 )
-begin
-	update Users 
-    set firstName = first_name,lastName = last_name,userEmail = user_email,userName = user_name,userPassword = user_password
-	where userId = user_id and activity = 1;
-end $$
+BEGIN
+	UPDATE Users 
+    SET firstName = first_name,lastName = last_name,userEmail = user_email,userName = user_name,userPassword = user_password
+	WHERE userId = user_id AND activity = 1;
+END $$
 
 DELIMITER ;
 
@@ -196,15 +208,41 @@ DELIMITER $$
 DROP PROCEDURE UserList $$
 
 CREATE PROCEDURE UserList()
-begin
-	select userID,firstName,lastName,userName
-    from Users where activity = 1;
-end $$
+BEGIN
+	SELECT userID,firstName,lastName,userName
+    FROM Users WHERE activity = 1;
+END $$
 
 DELIMITER ;
 
 DELIMITER $$
 
+DROP PROCEDURE getItemList $$
 
+CREATE PROCEDURE getItemList()
+BEGIN
+
+	SELECT * FROM item;
+
+END$$
 
 DELIMITER ; 
+
+DELIMITER $$
+
+DROP PROCEDURE getItem $$
+
+CREATE PROCEDURE getItem(item_id)
+BEGIN
+
+	SELECT * FROM item WHERE itemID = item_id;
+
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP 
+
+DELIMITER ;

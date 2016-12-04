@@ -54,7 +54,7 @@ CREATE FUNCTION setAccessLevel(access_level tinyint,user_id int,admin_id int)
 RETURNS INT
 BEGIN
 
-	IF(SELECT accessLevel FROM Users AND userID = admin_id) = 3 THEN
+	IF(SELECT accessLevel FROM Users WHERE userID = admin_id) = 3 THEN
 		UPDATE Users SET accessLevel = access_level WHERE userID = user_id AND activity = 1;
         RETURN access_level;
 	ELSE
@@ -173,7 +173,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE UpdateCategory $$
+DROP PROCEDURE  IF EXISTS UpdateCategory $$
 
 CREATE PROCEDURE UpdateCategory(category_name VARCHAR(45), category_id INT)
 BEGIN
@@ -185,7 +185,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE UpdateUser $$
+DROP PROCEDURE IF EXISTS UpdateUser $$
 
 CREATE PROCEDURE UpdateUser(
 	user_id INT,
@@ -205,7 +205,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE UserList $$
+DROP PROCEDURE IF EXISTS UserList $$
 
 CREATE PROCEDURE UserList()
 BEGIN
@@ -217,7 +217,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE getItemList $$
+DROP PROCEDURE IF EXISTS getItemList $$
 
 CREATE PROCEDURE getItemList()
 BEGIN
@@ -230,9 +230,9 @@ DELIMITER ;
 
 DELIMITER $$
 
-DROP PROCEDURE getItem $$
+DROP PROCEDURE IF EXISTS getItem $$
 
-CREATE PROCEDURE getItem(item_id)
+CREATE PROCEDURE getItem(item_id INT)
 BEGIN
 
 	SELECT * FROM item WHERE itemID = item_id;
@@ -242,7 +242,5 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
-
-DROP 
 
 DELIMITER ;

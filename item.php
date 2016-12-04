@@ -98,10 +98,46 @@
 
     <!-- Page Content -->
     <div class="container">
+        <!-- Modal -->
+        <form method="post" action="signup.php"> 
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Register</h4>
+                        </div>
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="reg_firstName" id="reg_firstName" placeholder="First Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="reg_lastName" id="reg_lastName" placeholder="Last Name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="reg_email" id="reg_email" placeholder="Email Address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="reg_username" id="reg_username" placeholder="Username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="reg_password" id="reg_password" placeholder="Password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="reg_passwordConfirm" id="reg_passwordConfirm" placeholder="Confirm Password" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                        <button name="registerUser" type="submit" id="registerUserButton" value="Register" class="btn btn-primary btn-block" >Sign Up</button>
 
-        <div class="row">
-
-            <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
             <p class="lead">Home</p>
             <div class="list-group">
                 <?php
@@ -109,13 +145,11 @@
                 ?>
             </div>
         </div>
-
-            <div class="col-md-9">
-                <?php require_once 'displayItemProfile.php'; ?>
-            </div>
-
+        <div class="col-md-9">
+            <?php 
+                require_once 'displayItemProfile.php'; 
+            ?>
         </div>
-
     </div>
     <!-- /.container -->
 
@@ -140,6 +174,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+
 
 </body>
 

@@ -13,8 +13,8 @@
 	    <div class="caption-full">
 	        <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
 	        <h4><a href="#">><?php echo $itemName ?></a></h4>
+	        <button class="addToCart">Add to cart</button>
 	        <p><?php echo $itemDesc ?></p>
-	        <div class="addCartButton">Add to cart</div>
 	    </div>
 	</div>
 <?php } ?>

@@ -121,7 +121,7 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS GetUser $$
 
-CREATE PROCEDURE GetUser(user_Name VARCHAR)
+CREATE PROCEDURE GetUser(user_Name VARCHAR(55))
 begin
 	SELECT userID,firstName,lastName,userEmail,userName,accessLevel
     FROM Users
@@ -261,7 +261,7 @@ DROP PROCEDURE IF EXISTS addToCart $$
 CREATE PROCEDURE addToCart(userID INT, itemID int)
 BEGIN
 
-	INSERT INTO cart(user_id, itemID)
+	INSERT INTO cart(user_id, item_id)
     VALUES(userID, itemID);
 
 END $$
@@ -288,7 +288,7 @@ DROP PROCEDURE IF EXISTS getCart $$
 CREATE PROCEDURE getCart(userID INT)
 BEGIN
 
-	SELECT  item.itemName, item.itemDescription, item.itemImagePath, item.itemPrice 
+	SELECT  item.itemName, item.itemDescription, item.itemImgPath, item.itemPrice 
     FROM cart 
     INNER JOIN item 
     ON item.itemID = cart.item_id

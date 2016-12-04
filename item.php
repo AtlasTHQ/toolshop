@@ -3,6 +3,7 @@
     require_once 'procedures.php';
     require_once 'signup.php';
     require_once 'login.php';
+    require_once 'addToCart.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 

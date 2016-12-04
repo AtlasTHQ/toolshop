@@ -43,11 +43,13 @@
             <ul class="nav navbar-nav navbar-right">
             <?php
                 if(isset($_SESSION['login_user']))
-                { 
+                {
+                    echo "YOU ARE LOGGED IN";
                     require_once 'loggedIn.php';
                 }
                 else
                 {
+                    echo "YOU ARE NOT LOGGED IN";
                     require_once 'notLoggedIn.php';
                 }
             ?>

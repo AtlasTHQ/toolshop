@@ -1,5 +1,4 @@
 <?php
-	require_once 'addToCart.php';
     $result = $conn->prepare("call getItem($item_id)");
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -15,7 +14,9 @@
 	    <div class="caption-full">
 	        <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
 	        <h4><?php echo $itemName ?></h4>
-	        <button class="addToCart" name="addToCart" type="submit">Add to cart</button>
+	        <form method="post">
+	        	<button class="addToCart" name="addToCart" type="submit">Add to cart</button>
+	        </form>
 	        <p><?php echo $itemDesc ?></p>
 	    </div>
 	</div>

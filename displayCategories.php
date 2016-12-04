@@ -4,5 +4,5 @@
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $catID = $row["categoryID"];
         $catName = $row["categoryName"]; ?>
-        <a href="#" class="list-group-item"><?php echo $catName ?></a>
+        <a href="<?php echo "index.php?categoryID=$catID" ?>" class="list-group-item"><?php echo $catName ?></a>
 <?php } ?>

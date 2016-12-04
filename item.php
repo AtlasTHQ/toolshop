@@ -111,7 +111,7 @@
         </div>
 
             <div class="col-md-9">
-
+                <?php require_once 'displayItemProfile.php'; ?>
             </div>
 
         </div>

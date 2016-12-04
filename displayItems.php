@@ -1,4 +1,5 @@
 <?php
+    $catID = $_GET['categoryID'];
     $result = $conn->prepare("call getItemList");
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {

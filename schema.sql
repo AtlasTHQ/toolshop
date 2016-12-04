@@ -243,4 +243,13 @@ DELIMITER ;
 
 DELIMITER $$
 
+DROP PROCEDURE IF EXISTS getCategoryItem $$
+
+CREATE PROCEDURE getCategoryItem(categoryID INT)
+BEGIN
+
+	SELECT * FROM item WHERE category_ID = categoryID;
+    
+END $$
+
 DELIMITER ;

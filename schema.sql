@@ -253,3 +253,48 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS addToCart $$
+
+CREATE PROCEDURE addToCart(userID INT, itemID int)
+BEGIN
+
+	INSERT INTO cart(user_id, itemID)
+    VALUES(userID, itemID);
+
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS removeFromCart $$
+
+CREATE PROCEDURE removeFromCart(userID INT, itemID INT)
+BEGIN
+
+	DELETE FROM cart WHERE user_id = userID AND item_id = itemID;
+
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS getCart $$
+
+CREATE PROCEDURE getCart(userID INT)
+BEGIN
+
+	SELECT  item.itemName, item.itemDescription, item.itemImagePath, item.itemPrice 
+    FROM cart 
+    INNER JOIN item 
+    ON item.itemID = cart.item_id
+    WHERE user_id = userID;
+
+END $$
+
+DELIMITER ;
+

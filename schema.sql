@@ -298,3 +298,18 @@ END $$
 
 DELIMITER ;
 
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS purchaseCart $$
+
+CREATE PROCEDURE purchaseCart(userID INT)
+BEGIN
+
+	DECLARE usr_id INT;
+    DECLARE itm_id INT;
+    
+    
+
+END $$
+
+DELIMITER ;

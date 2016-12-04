@@ -13,11 +13,12 @@
 		$dbUsers = new Users($conn);
 		if ($dbUsers->validateUser($username,$password)) {
 			$_SESSION['login_user']=$username; // Initializing Session
-			header("location: index.php"); // Redirecting To Other Page
+			
 			if(!isset($_SESSION)) 
 		    {
 		        session_start(); 
 		    }
+		    header("location: index.php"); // Redirecting To Other Page
 		} else {
 			header("location: index.php"); // Redirecting To Other Page
 			$error = "Username or Password is invalid";

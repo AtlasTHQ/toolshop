@@ -121,11 +121,11 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS GetUser $$
 
-CREATE PROCEDURE GetUser(user_Name INT)
+CREATE PROCEDURE GetUser(user_Name VARCHAR)
 begin
 	SELECT userID,firstName,lastName,userEmail,userName,accessLevel
     FROM Users
-    WHERE userName = userName AND activity = 1;
+    WHERE userName = user_Name AND activity = 1;
 end $$
 
 DELIMITER ;

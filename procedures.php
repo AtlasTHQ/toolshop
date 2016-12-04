@@ -303,7 +303,102 @@
 			
 			return $ret;
 		}
-	
 		
+	}
+
+	/**
+	* Item
+	*/
+	class Item
+	{
+		private $connection;
+
+		public function __construct($connection_name)
+		{
+			
+			if(!empty($connection_name)){
+
+				$this->connection = $connection_name;
+			}
+			else{
+				throw new Exception("cant connect to database");
+			}
+		}
+	}
+
+	/**
+	* Categories
+	*/
+	class Categories
+	{
+		private $connection;
+		
+		public function __construct($connection_name)
+		{
+			
+			if(!empty($connection_name)){
+
+				$this->connection = $connection_name;
+			}
+			else{
+				throw new Exception("cant connect to database");
+			}
+		}
+	}
+
+	/**
+	* Cart
+	*/
+	class Cart
+	{
+		private $connection;
+
+		public function __construct($connection_name)
+		{
+			
+			if(!empty($connection_name)){
+
+				$this->connection = $connection_name;
+			}
+			else{
+				throw new Exception("cant connect to database");
+			}
+		}
+
+		public function addToCart($userID,$itemID)
+		{
+			$statement = $this->connection->prepare('call addToCart(?,?)');
+			$statement->bindParam(1,$userID);
+			$statement->bindParam(2,$itemID);
+			
+			try 
+			{
+				$statement->execute();
+				
+				return true;
+			}
+			catch(PDOException $e)
+			{
+				return false;
+			}
+		}
+
+		public function getCart($userID)
+		{
+			$statement = $this->connection->prepare('call GetUser(?)');
+			$statement->bindParam(1,$userID);
+			
+			try 
+			{
+				$statement->execute();
+				
+				$row = $statement->fetch(PDO::FETCH_NUM);
+				return $row;
+			}
+			catch(PDOException $e)
+			{
+				return array();
+			}
+		}
 	}
 ?>

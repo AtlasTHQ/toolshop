@@ -4,7 +4,7 @@
         <li>
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form" role="form" method="post" action="login.php" accept-charset="UTF-8" id="login-nav">
+                    <form class="form" role="form" method="post"  accept-charset="UTF-8" id="login-nav">
                         <div class="form-group">
                             <label class="sr-only" for="username">Username</label>
                             <input type="username" name="log_username" class="form-control" id="log_username" placeholder="Username" required>

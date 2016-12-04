@@ -2,7 +2,6 @@
     require_once 'connection.php';
     require_once 'procedures.php';
     require_once 'signup.php';
-    require_once 'login.php';
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -42,14 +41,13 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
             <?php
+            require_once 'login.php';
                 if(isset($_SESSION['login_user']))
                 {
-                    echo "YOU ARE LOGGED IN";
                     require_once 'loggedIn.php';
                 }
                 else
                 {
-                    echo "YOU ARE NOT LOGGED IN";
                     require_once 'notLoggedIn.php';
                 }
             ?>

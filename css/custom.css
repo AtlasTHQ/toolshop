@@ -64,3 +64,6 @@
 .addToCart{
     float: right;
 }
+.removeFromCartButton{
+    float: right;
+}

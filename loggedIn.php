@@ -11,8 +11,8 @@
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?php echo $firstNameLoggedIn . " " . $lastNameLoggedIn;?></b> <span class="caret"></span></a>
     <ul class="dropdown-menu">
-	    <li><a href="#">Profile</a></li>
-	    <li><a href="#">Cart</a></li>
+	    <li><a href="profile.php">Profile</a></li>
+	    <li><a href="cart.php">Cart</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li><a href="logout.php">Logout</a></li>
  	</ul>

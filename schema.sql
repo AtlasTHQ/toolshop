@@ -288,7 +288,7 @@ DROP PROCEDURE IF EXISTS getCart $$
 CREATE PROCEDURE getCart(userID INT)
 BEGIN
 
-	SELECT  item.itemName, item.itemDescription, item.itemImgPath, item.itemPrice 
+	SELECT  item.itemID, item.itemName, item.itemDescription, item.itemImgPath, item.itemPrice 
     FROM cart 
     INNER JOIN item 
     ON item.itemID = cart.item_id
@@ -299,7 +299,7 @@ END $$
 DELIMITER ;
 
 DELIMITER $$
-
+/*
 DROP PROCEDURE IF EXISTS purchaseCart $$
 
 CREATE PROCEDURE purchaseCart(userID INT)
@@ -313,3 +313,4 @@ BEGIN
 END $$
 
 DELIMITER ;
+*/

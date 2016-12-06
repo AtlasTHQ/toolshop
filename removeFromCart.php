@@ -1,11 +1,14 @@
 <?php
+require_once "connection.php";
+
 session_start();
-$cartID = $_SESSION['cart_id'];
-if (isset($_POST[$cartID]))
+if (isset($_POST['cart_id']))
 {
-    $cartID = $_SESSION['cart_id'];
+	//echo $_POST['cart_id'];
+	$cartID = $_POST['cart_id'];
     $result = $conn->prepare("call removeFromCart($cartID)");
     $result->execute();
     header("cart.php");
 }
+    
 ?>

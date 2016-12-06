@@ -3,7 +3,8 @@
     $result = $conn->prepare("call getCart($userID)");
     $result->execute();
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    	$_SESSION['cart_id'] = $row["cartID"];
+    	//$_SESSION['cart_id'] = $row["cartID"];
+        $cart = $row['cartID'];
         $imgPath = $row["itemImgPath"];
         $itemName = $row["itemName"];
         $itemDesc = $row["itemDescription"];
@@ -17,8 +18,8 @@
                 <h4 class="pull-right"><?php echo "$".$itemPrice ?></h4>
                 <h4><?php echo $itemName ?></h4>
                 <p>
-                	<form method="post">
-                		<button class="removeFromCartButton" type="submit" name="<?php echo $_SESSION['cart_id'] ?>">X</button><br>
+                	<form method="post" action="removeFromCart.php">
+                		<button class="removeFromCartButton" type="submit" name="cart_id" value="<?php echo $cart ?>">X</button><br>
                 	</form>
                 	<?php echo $itemDesc ?>
                 </p>

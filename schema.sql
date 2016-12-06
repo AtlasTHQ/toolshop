@@ -37,7 +37,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE cart (
-	id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	cartID int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id int(11) NOT NULL,
 	item_id int(11) NOT NULL,
 	CONSTRAINT fk_user_ID FOREIGN KEY (user_ID) 
@@ -272,10 +272,11 @@ DELIMITER $$
 
 DROP PROCEDURE IF EXISTS removeFromCart $$
 
-CREATE PROCEDURE removeFromCart(userID INT, itemID INT)
+CREATE PROCEDURE removeFromCart(cart_id INT)
 BEGIN
 
-	DELETE FROM cart WHERE user_id = userID AND item_id = itemID;
+	DELETE FROM cart WHERE cartID = cart_id;
+	DELETE FROM cart WHERE cartID = cart_id;
 
 END $$
 
@@ -288,7 +289,7 @@ DROP PROCEDURE IF EXISTS getCart $$
 CREATE PROCEDURE getCart(userID INT)
 BEGIN
 
-	SELECT  item.itemID, item.itemName, item.itemDescription, item.itemImgPath, item.itemPrice 
+	SELECT  cartID, item.itemName, item.itemDescription, item.itemImgPath, item.itemPrice 
     FROM cart 
     INNER JOIN item 
     ON item.itemID = cart.item_id
